@@ -5,5 +5,7 @@ Code checks if HTML page on any given URL is static or if there is JavaScript re
     also checks for references to popular JS frameworks such as React Angular and Vue
   Python script scrapes any available tables
   User available interface available through Streamlit
+  https://github.com/user-attachments/assets/c8766f5b-485f-462e-86fb-b1187bd47539
+
 Note:
   Highly dynamic pages may be flagged as static, but may have content that is available after the initial page load
