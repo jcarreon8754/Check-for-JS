@@ -12,7 +12,7 @@ if st.button("Analyze"):
         st.error("Please enter a valid URL.")
     else:
         if not url.lower().startswith(("http://", "https://")):
-            url = "https://" + url
+            url = f"https://{url.strip()}"
 
         try:
             response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
@@ -30,10 +30,10 @@ if st.button("Analyze"):
             text_length = len(soup.get_text(separator=" ", strip=True))
             html_length = len(html)
 
-            if (paragraphs_count + headers_count + tables_count > 5) and scripts_count > 0:
-                st.warning("Possibly JS-rendered: HTML has very little direct content.")
+            if (paragraphs_count + headers_count + tables_count < 5) and scripts_count > 0:
+                st.warning("Possibly JS-rendered: HTML has very little direct content. Use Selenium or Playwright for Scraping")
             else:
-                st.success("Likely static: Page content is present in the initial HTML")
+                st.success("Likely static: Page content is present in the initial HTML. Requests and BeautifulSoup will be sufficient")
 
             if any(framework in html.lower() for framework in ['react', 'angular', 'vue']):
                 st.info("Detected references to React/Angular/Vue in the HTML (may indicate JS framework)")
